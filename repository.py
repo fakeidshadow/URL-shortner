@@ -1,6 +1,11 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 import models
+from datetime import datetime
+import pytz
+
+
+tz = pytz.timezone('Asia/Tehran')
 import string
 import random
 
@@ -18,6 +23,14 @@ class Repository:
     def __init__(self, db):
         self.db = db
 
+    def get_all_urls(self):
+        return self.db.query(models.Url).all()
+    
+
+    def get_url(self, code:str):
+        return self.get_Url_by_code(code)
+    
+    
 
     def add(self, url:str, code:str, date:str) -> int:
         """
