@@ -10,7 +10,7 @@ class LinkService:
 
     def get_original_url(self, short_code: str):
         try:
-            obj = self.repository.get_url(short_code)
+            obj = self.repository.get_Url_by_code(short_code)
             if obj is None:
                 return 404,
             return 302, str(obj.address)
@@ -54,7 +54,8 @@ class LinkService:
     def delete_link(self, code: str):
         try:
             obj = self.repository.get_Url_by_code(code)
-
+            if obj is None:
+                return 404
             self.repository.delete(obj)
             return 200
         except:

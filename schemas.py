@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class LinkCreate(BaseModel):
-    original_url: str
+    address: str
 
 class LinkResponse(BaseModel):
     address: str
