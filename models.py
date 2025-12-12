@@ -9,5 +9,5 @@ class Url(Base):
 
     id = Column(Integer, primary_key=True)
     address = Column(String(100), unique=True)
-    code = Column(String(100), unique=True)
+    code = Column(String(10), unique=True)
     date = Column(String(50))
