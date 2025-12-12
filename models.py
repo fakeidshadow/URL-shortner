@@ -11,3 +11,17 @@ class Url(Base):
     address = Column(String(100), unique=True)
     code = Column(String(10), unique=True)
     date = Column(String(50))
+
+
+def add(url:str, code:str, date:str) -> Url:
+    """
+    :param url:
+    :param code:
+    :param date:
+    :return: id
+    """
+    return Url(
+        address=url,
+        code=code,
+        date=date
+    )
