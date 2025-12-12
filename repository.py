@@ -29,7 +29,7 @@ def get_url_id(url:str) -> int | None:
     :param url:
     :return: id if exists else None
     """
-    url = session.query(models.Url).filter_by(url=url).one_or_none()
+    url = session.query(models.Url).filter_by(address=url).one_or_none()
     return url.id if url is not None else None
 
 def get_code(code:str) -> int | None:
