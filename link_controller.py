@@ -7,18 +7,22 @@ from repository import Repository
 from link_service import LinkService
 import models
 from sqlalchemy.orm import Session
+from schemas import LinkResponse
+import repository
 
 router = APIRouter()
 
-def get_repository(db: Session) -> Repository:
-    return Repository(db)
+def get_repository(db: Session = Depends(lambda: repository.session)) -> LinkService:
+    repo = Repository(db)
+    return LinkService(repo)
+
 
 @router.get("/{code}")
 def redirect(
     code: str,
     service: LinkService = Depends(get_repository)
-):
-    url_obj = service.repository.get_original_url(code)
+)->RedirectResponse:
+    url_obj = service.repository.get_url(code)
     if url_obj is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -26,7 +30,6 @@ def redirect(
         )
     return RedirectResponse(url=url_obj.address, status_code=status.HTTP_302_FOUND)
 
-@router.get("/links", response_model=List[LinkResponse])
 def get_all_links(
     service: LinkService = Depends(get_repository)
 ):
