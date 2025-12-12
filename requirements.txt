@@ -1,5 +1,0 @@
-SQLAlchemy==2.0.45
-alembic==1.17.2
-pydantic==2.12.5
-pytz==2025.2
-fastapi==0.124.4
